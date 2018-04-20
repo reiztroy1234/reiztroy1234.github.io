@@ -18,8 +18,15 @@
                 urlParams = {};
                 while (match = search.exec(query))
                     urlParams[decode(match[1])] = decode(match[2]);
-            })();
-        alert(urlParams["test"]);
+        })();
+        //http://yourredirecturl.com#access_token=someaccesstoken&token_type=Bearer&state=&scope=buyorder+sellorder+history
+        var access_token = urlParams["access_token"];
+        var token_type = urlParams["token_type"];
+        var state = urlParams["state"];
+        var scope = urlParams["scope"];
+
+        alert(access_token + " ; " + token_type + " ; " + state + " ; " + scope);
+
     </script>
     
 </body>
