@@ -23,7 +23,7 @@
         var access_token = urlParams["access_token"];
         var token_type = urlParams["token_type"];
         var state = urlParams["state"];
-        var scope = urlParams["scope"];
+        var scope = urlParams["scope"].replace(' ','+');
 
         alert(access_token + " ; " + token_type + " ; " + state + " ; " + scope);
 
