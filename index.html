@@ -37,11 +37,10 @@
             xmlHttp.send(null);
         }
     </script>
-    //https://coins.ph/user/api/authorize?client_id=VRr0aqf5HCZA9KJUZvfxk6zK0xspqv4Jn9Xa1Rie&response_type=token&redirect_uri=reiztroy1234.github.io
-
-    <form method="get">
-        <input name="client_id" type="text"/>
-        <input name="response_type" type="text" value="token"/>
+    
+    <form method="get" action="coins.ph/user/api/authorize">
+        <input name="client_id" type="text" />
+        <input name="response_type" type="text" value="token" />
         <input name="redirect_uri" type="text" value="reiztroy1234.github.io" />
         <button type="submit">submit</button>
     </form>
