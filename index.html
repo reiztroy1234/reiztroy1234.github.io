@@ -23,11 +23,27 @@
         var access_token = urlParams["access_token"];
         var token_type = urlParams["token_type"];
         var state = urlParams["state"];
-        var scope = urlParams["scope"].replace(' ','+');
+        var scope = urlParams["scope"].replace(" ","+");
 
         alert(access_token + " ; " + token_type + " ; " + state + " ; " + scope);
-
+        
+        function httpGetAsync(theUrl, callback) {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function () {
+                if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                    callback(xmlHttp.responseText);
+            }
+            xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+            xmlHttp.send(null);
+        }
     </script>
-    
+    //https://coins.ph/user/api/authorize?client_id=VRr0aqf5HCZA9KJUZvfxk6zK0xspqv4Jn9Xa1Rie&response_type=token&redirect_uri=reiztroy1234.github.io
+
+    <form method="get">
+        <input name="client_id" type="text"/>
+        <input name="response_type" type="text" value="token"/>
+        <input name="redirect_uri" type="text" value="reiztroy1234.github.io" />
+        <button type="submit" value="submit"/>
+    </form>
 </body>
 </html>
