@@ -23,7 +23,7 @@
         var access_token = urlParams["access_token"];
         var token_type = urlParams["token_type"];
         var state = urlParams["state"];
-        var scope = urlParams["scope"].replace(" ","+");
+        var scope = urlParams["scope"];
 
         alert(access_token + " ; " + token_type + " ; " + state + " ; " + scope);
         
@@ -43,7 +43,7 @@
         <input name="client_id" type="text"/>
         <input name="response_type" type="text" value="token"/>
         <input name="redirect_uri" type="text" value="reiztroy1234.github.io" />
-        <button type="submit" value="submit"/>
+        <button type="submit">submit</button>
     </form>
 </body>
 </html>
