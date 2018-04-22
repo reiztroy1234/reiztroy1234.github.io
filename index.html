@@ -102,15 +102,41 @@
 
         //alert(access_token + " ; " + token_type + " ; " + state + " ; " + scope);
         
-        function httpGetAsync(theUrl, callback) {
+
+        function httpGetAsync(theUrl, callback, JSONheaders) {
             var xmlHttp = new XMLHttpRequest();
             xmlHttp.onreadystatechange = function () {
                 if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
                     callback(xmlHttp.responseText);
             }
+
+            if (JSONheaders) {
+                for (var i = 0; i < JSONheaders.count; i++) {
+                    xmlHttp.setRequestHeader(JSONheaders[i].key, JSONheaders[i].value);
+                }
+            }
+
             xmlHttp.open("GET", theUrl, true); // true for asynchronous 
             xmlHttp.send(null);
         }
+
+        
+
+        function GetCryptoAccount(token) {
+
+            var cryptoAccountHeaders = [
+            { 'key': 'Authorization' }, { 'value': 'Bearer ' + token },
+            { 'key': 'Content-Type' }, { 'value': 'application/json;charset=UTF-8' },
+            { 'key': 'Accept' }, { 'value': 'application/json' }
+            ];
+
+            httpGetAsync('https://coins.ph/api/v3/crypto-accounts', 
+                function(response){
+                    //var accounts = JSON.parse(response);
+                    alert(response);
+                }, cryptoAccountHeaders);
+        }
+        
     </script>
     <section class="header">
         <header>
