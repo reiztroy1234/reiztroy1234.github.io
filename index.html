@@ -76,7 +76,12 @@
 <script>
     $(document).ready(
         function () {
+
             var debugOut = $("#debugOut")[0].childNodes[0];
+            window.onerror = function (message, source, lineno, colno, error) {
+                debugOut.nodeValue += message + "\r\n";
+            };
+
             var urlParams;
             (window.onpopstate = function () {
 
@@ -103,7 +108,7 @@
             function httpGetAsync(theUrl, callback, JSONheaders) {
                 var xmlHttp = new XMLHttpRequest();
                 xmlHttp.onreadystatechange = function () {
-                    debugOut.nodeValue = "readystate:" + xmlHttp.readyState + " ; status:" + xmlHttp.status + " ; responseText:" + xmlHttp.responseText;
+                    debugOut.nodeValue = "readystate:" + xmlHttp.readyState + " ; status:" + xmlHttp.status + " ; responseText:" + xmlHttp.responseText + "\r\n";
                     if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
                         callback(xmlHttp.responseText);
                 }
@@ -173,7 +178,7 @@
                 </tbody>
             </table>
         </form>
-        <div id="debugOut">test</div>
+        <div><pre id="debugOut">test</pre></div>
     </section>
     <footer>
         <pre>            A simple coins.ph API integration.
