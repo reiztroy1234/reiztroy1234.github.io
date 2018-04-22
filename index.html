@@ -1,6 +1,80 @@
 <html>
 <head>
     <title>LuckyEx</title>
+    <style>
+
+        html,body
+        {
+            margin:0;
+            padding:0;
+        }
+
+        section.header
+        {
+            width: 100%;
+            height: 150px; 
+            background-color:#222233;
+        }
+
+        section.header>header
+        {
+            color:#111111;
+            font-size:100px;
+            font-family:Cambria;
+            font-weight:bolder;
+            text-shadow:0px 0px 20px #0094ff;   
+        }
+
+        section.main-body
+        {
+            width:99.9%;
+            height:200%;
+            background-color:#333344;
+            border:solid darkslategray 1px;
+            margin:0;
+        }
+        section.main-body>form
+        {
+            width:300px;
+            height:300px;
+            position:absolute;
+            align-self:baseline;
+            margin-top:2%;
+            margin-left:40%;
+        }
+        section.main-body > form > table
+        {
+            font-family: Cambria;
+            font-weight: bolder;
+            border: 2px solid darkslategray;
+            box-shadow: #0094ff 1px 1px 24px;
+            border-radius:4px;
+            height:100%;
+            width:100%;
+            padding:10px;
+        }
+        input
+        {
+            background:#0083dd;
+            border:1px solid #00A5ff;
+        }
+        input.button
+        {
+            border-radius:3px;
+            font-weight:bold;
+            color:#111111;
+            background-color:darkslategray;
+        }
+        footer
+        {
+            width:100%;
+            height:auto;
+            position:absolute;
+            align-self:baseline;
+            margin:0;
+            background-color:#222233;
+        }
+    </style>
 </head>
 <body>
 
@@ -19,13 +93,14 @@
                 while (match = search.exec(query))
                     urlParams[decode(match[1])] = decode(match[2]);
         })();
+
         //http://yourredirecturl.com#access_token=someaccesstoken&token_type=Bearer&state=&scope=buyorder+sellorder+history
         var access_token = urlParams["access_token"];
         var token_type = urlParams["token_type"];
         var state = urlParams["state"];
         var scope = urlParams["scope"];
 
-        alert(access_token + " ; " + token_type + " ; " + state + " ; " + scope);
+        //alert(access_token + " ; " + token_type + " ; " + state + " ; " + scope);
         
         function httpGetAsync(theUrl, callback) {
             var xmlHttp = new XMLHttpRequest();
@@ -37,12 +112,43 @@
             xmlHttp.send(null);
         }
     </script>
-    
-    <form method="get" action="https://coins.ph/user/api/authorize">
-        <input name="client_id" type="text" />
-        <input name="response_type" type="text" value="token" />
-        <input name="redirect_uri" type="text" value="reiztroy1234.github.io" />
-        <button type="submit">submit</button>
-    </form>
+    <section class="header">
+        <header>
+            <pre>LuckyEx</pre>
+            
+        </header>
+    </section>
+    <section class="main-body">
+        
+        <form method="get" action="https://coins.ph/user/api/authorize">
+            <table>
+                <thead>
+                    <tr>
+                        <td colspan="2" align="center" style="font:bold 24 arial,verdana; text-shadow:0px 0px 10px #223322;">Coins.ph Info</td>
+                    </tr>
+                </thead>
+                <tr>
+                    <td><label>Client Id </label></td>
+                    <td><input id="client_id" name="client_id" type="text" /></td>
+                </tr>
+                <tr>
+                    <td><label>Response Type</label></td>
+                    <td><input id="response_type" name="response_type" type="text" value="token" /></td>
+                </tr>
+                <tr>
+                    <td><label>Redirect Uri</label></td>
+                    <td><input id="redirect_uri" name="redirect_uri" type="text" value="reiztroy1234.github.io"/></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center"><input class="button" name="submit" type="submit" value="authorize" /></td>
+                </tr>
+            </table>
+        </form>
+    </section>
+    <footer>
+        <pre>
+            A simple coins.ph API integration.
+        </pre>
+    </footer>
 </body>
 </html>
