@@ -132,7 +132,7 @@
                 xmlHttp.open("GET", theUrl, true); // true for asynchronous
 
                 if (access_token) {
-
+                    xmlHttp.withCredentials = true;
                     debugOut.nodeValue += "Setting http headers\n\r";
                     for (var i = 0; i < JSONheaders.length; i++) {
                         xmlHttp.setRequestHeader(JSONheaders[i].key, JSONheaders[i].value);
