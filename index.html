@@ -152,10 +152,12 @@
                 var cryptoAccountHeaders = [
                 { 'key': 'Authorization','value': 'Bearer ' + token },
                 { 'key': 'Content-Type','value': 'application/json;charset=UTF-8' },
-                { 'key': 'Accept','value': 'application/json' },
+                { 'key': 'Accept', 'value': 'application/json' },
+                { 'key': 'Access-Control-Allow-Origin', 'value': '*' }
+
                 ];
 
-                httpGetAsync('coins.ph/api/v3/crypto-accounts',
+                httpGetAsync('https://coins.ph/api/v3/crypto-accounts',
                     function (response) {
                         //var accounts = JSON.parse(response);
                         debugOut.nodeValue += "response:" + response + "\n\r";
