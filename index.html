@@ -80,15 +80,14 @@
 
             var debugOut = $("#debugOut")[0].childNodes[0];
             debugOut.nodeValue += "\n\r";
-            window.addEventListener('error'),
-            function (message, source, lineno, colno, error) {
+            window.addEventListener('error',function (message, source, lineno, colno, error) {
                 debugOut.nodeValue += "error occur\n\r";
                 debugOut.nodeValue +="\tmessage:"+ message + "\r\n";
                 debugOut.nodeValue += "\tsource:" + source + "\r\n";
                 debugOut.nodeValue += "\tlineno:" + lineno + "\r\n";
                 debugOut.nodeValue += "\tcolno:" + colno + "\r\n";
                 debugOut.nodeValue += "\terror:" + error + "\r\n";
-            };
+            });
            
 
             var urlParams;
