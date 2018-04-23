@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
     <title>LuckyEx</title>
@@ -23,7 +24,7 @@
 
         section.main-body {
             width: 99.9%;
-            height: 200%;
+            height: 1000px;
             background-color: #333344;
             border: solid darkslategray 1px;
             margin: 0;
@@ -78,9 +79,17 @@
         function () {
 
             var debugOut = $("#debugOut")[0].childNodes[0];
-            window.onerror = function (message, source, lineno, colno, error) {
-                debugOut.nodeValue += message + "\r\n";
+            debugOut.nodeValue += "\n\r";
+            window.addEventListener('error'),
+            function (message, source, lineno, colno, error) {
+                debugOut.nodeValue += "error occur\n\r";
+                debugOut.nodeValue +="\tmessage:"+ message + "\r\n";
+                debugOut.nodeValue += "\tsource:" + source + "\r\n";
+                debugOut.nodeValue += "\tlineno:" + lineno + "\r\n";
+                debugOut.nodeValue += "\tcolno:" + colno + "\r\n";
+                debugOut.nodeValue += "\terror:" + error + "\r\n";
             };
+           
 
             var urlParams;
             (window.onpopstate = function () {
@@ -94,6 +103,12 @@
                 urlParams = {};
                 while (match = search.exec(query))
                     urlParams[decode(match[1])] = decode(match[2]);
+
+                debugOut.nodeValue += "URL parameters decoded\n\r";
+                debugOut.nodeValue += "\taccess_token:" + urlParams["access_token"] + "\n\r";
+                debugOut.nodeValue += "\ttoken_type:" + urlParams["token_type"] + "\n\r";
+                debugOut.nodeValue += "\tstate:" + urlParams["state"] + "\n\r";
+                debugOut.nodeValue += "\tscope:" + urlParams["scope"] + "\n\r";
             })();
 
             //http://yourredirecturl.com#access_token=someaccesstoken&token_type=Bearer&state=&scope=buyorder+sellorder+history
@@ -107,19 +122,23 @@
 
             function httpGetAsync(theUrl, callback, JSONheaders) {
                 var xmlHttp = new XMLHttpRequest();
+                xmlHttp.onerror = window.onerror;
                 xmlHttp.onreadystatechange = function () {
                     debugOut.nodeValue += "readystate:" + xmlHttp.readyState + " ; status:" + xmlHttp.status + " ; responseText:" + xmlHttp.responseText + "\r\n";
                     if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
                         callback(xmlHttp.responseText);
-                }
+                 }
                 
+                debugOut.nodeValue += "Opening http request\n\r";
                 xmlHttp.open("GET", theUrl, true); // true for asynchronous
 
                 if (access_token) {
+
+                    debugOut.nodeValue += "Setting http headers\n\r";
                     for (var i = 0; i < JSONheaders.length; i++) {
                         xmlHttp.setRequestHeader(JSONheaders[i].key, JSONheaders[i].value);
                     }
-
+                    debugOut.nodeValue += "Sending...\n\r";
                     xmlHttp.send(null);
                 }
                 
@@ -136,7 +155,7 @@
                 httpGetAsync('https://coins.ph/api/v3/crypto-accounts',
                     function (response) {
                         //var accounts = JSON.parse(response);
-                        alert(response);
+                        debugOut.nodeValue += "response:" + response + "\n\r";
                     }, cryptoAccountHeaders);
             }
 
@@ -177,7 +196,7 @@
                 </tbody>
             </table>
         </form>
-        <div><pre id="debugOut">test</pre></div>
+        <div><pre id="debugOut">Debug:</pre></div>
     </section>
     <footer>
         <pre>            A simple coins.ph API integration.
